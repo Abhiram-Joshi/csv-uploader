@@ -53,7 +53,7 @@ class AuthAPIView(APIView):
         )
 
         if not user.exists():
-            response = response_writer("error", None, 404, "User not found")
+            response = response_writer("error", None, 404, "Incorrect combination of credentials")
             return Response(response, status=status.HTTP_404_NOT_FOUND)
 
         access_token = get_access_token(serializer.validated_data["username"])
