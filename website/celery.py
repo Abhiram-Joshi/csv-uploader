@@ -4,7 +4,10 @@ from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'website.settings')
 
-app = Celery('website')
+app = Celery(
+    'website',
+    broker="amqp://guest:guest@localhost",
+)
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 

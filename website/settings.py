@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "account",
     "uploader",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [

@@ -28,7 +28,10 @@ class ExtractContactsAPIView(APIView):
 
         # csv_extract.delay(request.user, file)
         # csv_extract.delay(file)
-        csv_extract.apply_async(request.user.username, serializer.validated_data["file"].file.read().decode())
+        res = csv_extract.apply_async(
+            (request.user.username, serializer.validated_data["file"].file.read().decode()),
+        )
+        # csv_extract.delay(request.user.username, serializer.validated_data["file"].file.read().decode())
  
         # csv_reader = csv.DictReader(file)
 
