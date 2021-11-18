@@ -13,6 +13,12 @@ import re
 class ExtractContactsAPIView(APIView):
     parser_classes = (MultiPartParser,)
 
+    def get(self, request):
+        contact_data = ContactsModel.objects.values()
+    
+        response = response_writer("success", contact_data, 200, "Contacts received")
+        return Response(response, status=status.HTTP_200_OK)
+
     def post(self, request):
         serializer = CSVSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
