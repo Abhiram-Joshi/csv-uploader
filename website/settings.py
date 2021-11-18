@@ -29,7 +29,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "account.User"
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("account.authentication.JWTAuthentication",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "account",
 ]
 
 MIDDLEWARE = [
@@ -78,8 +84,12 @@ WSGI_APPLICATION = "website.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "csv_uploader",
+        "USER": "postgres",
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
